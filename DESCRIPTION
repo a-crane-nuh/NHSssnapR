@@ -1,0 +1,34 @@
+Package: NHSssnapR
+Type: Package
+Title: Tools for Sentinel Stroke National Audit Programme (SSNAP) Local Data Processing and Reporting
+Version: 0.1.0
+Authors@R: c(
+    person(
+      "Adam", "Crane",
+      email = "adam.crane@nhs.net",
+      role = c("aut", "cre")
+    )
+  )
+Description: Provides a standardised framework for importing, validating, transforming,   
+    and analysing Sentinel Stroke National Audit Programme (SSNAP) data within NHS organisations. 
+    The package supports the calculation of SSNAP performance indicators, 
+    generation of reproducible visualisations and reports, and the production of consistent local, 
+    regional, and organisational performance outputs. Designed to improve efficiency, 
+    reproducibility, and standardisation of stroke audit reporting workflows 
+    across NHS trusts and integrated stroke delivery networks (ISDNs).
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Config/roxygen2/version: 8.0.0
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Imports: 
+    data.table,
+    ggplot2,
+    hms,
+    NHSRplotthedots,
+    scales,
+    svglite,
+    quarto
+RoxygenNote: 7.3.3

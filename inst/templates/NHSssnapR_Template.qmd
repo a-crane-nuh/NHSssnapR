@@ -1,0 +1,1422 @@
+---
+title-block-banner:  Data/MedicineBackground.png
+
+title: "Stroke Care Key Performance Indicators (KIs) for <br> `r params$param_site_name`"
+subtitle: "Based on SSNAP Key Indicators and locally exported data, aggregated by `r params$param_grouped`"
+date: "`r params$param_date`"
+date-modified: last-modified 
+date-format: full
+
+language:
+  title-block-published: "Data to: "
+  title-block-modified: "Updated on: "
+
+toc: true
+toc-location: right
+tot-title: "Contents"
+number-sections: false
+highlight-style: github
+number-depth: 3
+number-offset: 3
+editor: visual
+code-link: true
+smooth-scroll: true
+link-external-newwindow: true
+theme: 
+    light: flatly
+
+format:
+  html:
+    css: css/styles_nuh_brand.css
+    embed-resources: true
+    html-math-method: katex
+    code-tools: false
+    other-links:
+      - text: Simplified Technical Information – SSNAP Key Indicators
+        href: https://ssnap.zendesk.com/hc/en-us/categories/360003171177-Simplified-Technical-Guidance  
+      - text: How SSNAP scores are calculated
+        href: https://ssnap.zendesk.com/hc/en-us/articles/23530505498525-How-are-SSNAP-scores-calculated
+lightbox:
+  match: auto
+  effect: fade
+  desc-position: right
+  loop: true
+
+params:
+  param_site_name: ""
+  param_date: ""
+  param_data: ""
+  param_grouped: ""
+
+execute: 
+  dir: project
+  echo: false
+  warning: false
+  cache: false
+---
+
+```{r}
+#| label: get data
+
+if (file.exists("out/data/aggregated.rds")) {
+  agg_data <- readRDS("out/data/aggregated.rds")
+} else {stop("RDS data not found")}
+
+```
+
+# Overview and Scoring {#start}
+
+This document provides a comprehensive overview of key performance indicators used to assess the quality and effectiveness of stroke care across the patient pathway. The indicators are organised into seven categories, each focusing on critical stages of stroke management: hyperacute assessment, specialist pathway, reperfusion, specialist assessment, therapy intensity, therapy frequency, and standards by discharge.\
+These measures cover aspects such as the speed and quality of initial and specialist assessments, the timeliness and suitability of advanced imaging and interventions, the provision and intensity of therapy and rehabilitation, and the standards maintained up to the point of discharge. Together, these indicators enable healthcare providers to evaluate and enhance the delivery of stroke services, ensuring that patients receive prompt, specialised, and effective care throughout their hospital journey and into the community.
+
+## Indicator Multipliers and Matrices
+
+Domains are determined through the aggregation of individual domain indicators. The method by which these indicators contribute to the overall domain score may involve the application of either a score multiplier or a score matrix conversion. These specific adjustments are identified by a corresponding suffix in the [**INDICATOR CODE DESCRIPTION**]{style="color: var(--nuh-nhs-blue);"}, as outlined below.
+
+- [**matrix = value to score matrix**.]{style="font-size: 12px; color: #B30300"} [This indicates that the indicator undergoes a score matrix conversion, where the raw value is mapped onto a scoring matrix to derive the final score.]{style="font-size: 12px;"}\
+- [**multiplier = score multiplier**.]{style="font-size: 12px; color: #B30300"} [In this case, the indicator’s score is adjusted by applying a predetermined multiplier to the raw score.]{style="font-size: 12px;"}\
+- [If neither a matrix nor a multiplier is specified.]{style="font-size: 12px;"} [**the score for this indicator is the percentage attained**]{style="font-size: 12px; color: #B30300"}\
+
+# Total Key Indicator Score
+
+The graph below presents a comprehensive aggregation of the key indicators discussed throughout this document. Each indicator score has been calculated according to the specific methods defined earlier, including matrix conversion, score multipliers, or as a percentage of the target achieved. The total score derived from these indicators is then assigned a grade, using a five-band system. These bands range from A [**(green)**.]{style="color: #A5D46A"}, representing the highest performance, to E [**(red)**.]{style="color: #FFA080"}, which indicates the lowest level of attainment.
+
+[Please note, these scores are pre deduction scores only and are an indication towards the SSNAP level only.]{style="font-size: 12px; font-style: italic; color: #B30300;"}
+
+```{r}
+#| label: Total key indicator score
+#| column: page
+#| fig-align: center
+#| out-width: 100%
+
+if (file.exists("out/plots/total_key_indicator/TotalKeyIndicator.svg")) {
+  knitr::include_graphics("out/plots/total_key_indicator/TotalKeyIndicator.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+
+```
+
+# 1. Hyperacute assessment Key Indicators {#Domain1}
+
+The hyperacute assessment key indicators focus on the timeliness and quality of initial stroke care. They include the proportion of patients scanned within 20 minutes, the median time from clock start to scan, and the percentage receiving CTA during their first imaging visit. Additional indicators assess the proportion of wake-up strokes or strokes with unknown onset given advanced imaging (CTA, CTP, or MRI) at first visit, as well as the percentage of patients reviewed by stroke-skilled clinicians within one hour, assessed by trained nurses within four hours, and those receiving a swallow screen within four hours of clock start.
+
+```{r}
+#| label: Domain 1 average score
+#| fig-align: center
+#| out-width: 100%
+
+if (file.exists("out/plots/domain_scores/Domain_One.svg")) {
+  knitr::include_graphics("out/plots/domain_scores/Domain_One.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+
+```
+
+### Individual indicators for domain one
+
+::: panel-tabset
+# 1.1
+
+```{r}
+#| label: "1.1"
+#| lightbox:
+#|   group: Domain 1
+
+if (file.exists("out/plots/key_indicators/KI_1_1.svg")) {
+  knitr::include_graphics("out/plots/key_indicators/KI_1_1.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+```
+
+# 1.2
+
+```{r}
+#| label: "1.2"
+#| lightbox:
+#|   group: Domain 1
+
+if (file.exists("out/plots/key_indicators/KI_1_2.svg")) {
+  knitr::include_graphics("out/plots/key_indicators/KI_1_2.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+```
+
+# 1.3
+
+```{r}
+#| label: "1.3"
+#| lightbox:
+#|   group: Domain 1
+
+if (file.exists("out/plots/key_indicators/KI_1_3.svg")) {
+  knitr::include_graphics("out/plots/key_indicators/KI_1_3.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+```
+
+# 1.4
+
+```{r}
+#| label: "1.4"
+#| lightbox:
+#|   group: Domain 1
+
+if (file.exists("out/plots/key_indicators/KI_1_4.svg")) {
+  knitr::include_graphics("out/plots/key_indicators/KI_1_4.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+```
+
+# 1.5
+
+```{r}
+#| label: "1.5"
+#| lightbox:
+#|   group: Domain 1
+
+if (file.exists("out/plots/key_indicators/KI_1_5.svg")) {
+  knitr::include_graphics("out/plots/key_indicators/KI_1_5.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+```
+
+# 1.6
+
+```{r}
+#| label: "1.6"
+#| lightbox:
+#|   group: Domain 1
+
+if (file.exists("out/plots/key_indicators/KI_1_6.svg")) {
+  knitr::include_graphics("out/plots/key_indicators/KI_1_6.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+```
+
+# 1.7
+
+```{r}
+#| label: "1.7"
+#| lightbox:
+#|   group: Domain 1
+
+if (file.exists("out/plots/key_indicators/KI_1_7.svg")) {
+  knitr::include_graphics("out/plots/key_indicators/KI_1_7.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+```
+:::
+
+::: {.callout-note collapse="true"}
+## Indicator code descriptions
+
+**KI.1.1** = 1.1 Percentage of patients scanned within 20 minutes of clock start [**multiplier**.]{style="font-size: 12px; color: #B30300"}\
+**KI.1.2** = 1.2 Median time between clock start and scan (hours:mins) [**matrix**.]{style="font-size: 12px; color: #B30300"}\
+**KI.1.3** = 1.3 Percentage of patients given CTA on first imaging visit [**multiplier**.]{style="font-size: 12px; color: #B30300"}\
+**KI.1.4** = 1.4 Percentage of wake-up strokes and strokes with unknown onset time given CTA, CTP or MRI on first imaging visit [**multiplier**.]{style="font-size: 12px; color: #B30300"}\
+**KI.1.5** = 1.5 Percentage of patients assessed by a stroke-skilled clinician (including consultant) within 1 hour of clock start\
+**KI.1.6** = 1.6 Percentage of patients assessed by a nurse trained in stroke management within 4 hours of clock start\
+**KI.1.7** = 1.7 Percentage of applicable patients who were given a swallow screen within 4 hours of clock start\
+:::
+
+### 1. Data tables
+
+```{r}
+#| label: "domain_one: data table"
+#| fig-align: center
+#| out-width: 100%
+
+domain_one<-
+agg_data|>
+  dplyr::reframe(date
+          ,KI_1_1 = as.numeric(KI_1_1)
+          ,KI_1_2 = chron::times(KI_1_2/86400)
+          ,KI_1_3 = as.numeric(KI_1_3)
+          ,KI_1_4 = as.numeric(KI_1_4)
+          ,KI_1_5 = as.numeric(KI_1_5)
+          ,KI_1_6 = as.numeric(KI_1_6)
+          ,KI_1_7 = as.numeric(KI_1_7)
+          ,Domain_One
+  )|>
+  dplyr::arrange(desc(date))|>
+  head(12)|>
+  as.data.frame()
+
+domain_one|>
+  gt::gt()|>
+    gt::fmt_percent(
+      columns = dplyr::all_of(
+        c("KI_1_1","KI_1_3","KI_1_4","KI_1_5","KI_1_6","KI_1_7","Domain_One"))
+      )|>
+    gt::grand_summary_rows(
+      columns = dplyr::all_of(
+        c("KI_1_1","KI_1_2","KI_1_3","KI_1_4","KI_1_5","KI_1_6","KI_1_7","Domain_One" )),
+      fns = list(
+        min~min(., na.rm = TRUE)
+        ,median~median(.,na.rm = TRUE)
+        ,max~max(., na.rm = TRUE)
+      )
+      , fmt = ~fmt_percent(.,dplyr::all_of(c("KI_1_1", "KI_1_3","KI_1_4","KI_1_5","KI_1_6","KI_1_7","Domain_One")),use_seps = FALSE)
+    )|>
+    gt::cols_label(KI_1_1="K.I 1.1"
+                   ,KI_1_2="K.I 1.2"
+                   ,KI_1_3="K.I 1.3"
+                   ,KI_1_4="K.I 1.4"
+                   ,KI_1_5="K.I 1.5"
+                   ,KI_1_6="K.I 1.6"
+                   ,KI_1_7="K.I 1.7"
+                   ,Domain_One = gt::md("Domain<br>Avg Score"))|>
+    gt::cols_align(align = "center"
+             ,columns = everything())|>
+    gt::tab_header(
+    title = gt::md("**1. Hyperacute assessment Key Indicators**")
+    #,subtitle = md(paste0(DataTableFrom," & ",DataTableTo))
+  )|>
+    gt::tab_footnote(
+    footnote = "Data produced from the beta version of the NHSssnapR package"
+  )|>
+    gt::tab_source_note(
+    source_note = "Sourced from SSNAP Team data export"
+  )|>
+    gt::opt_align_table_header(align = "left")|>
+    gt::opt_stylize(color = "gray", add_row_striping = TRUE )|>
+    gt::tab_options(table.font.size = 13) # 12 is slightly too small/14 default
+```
+
+::: {style="text-align: center; margin-top: 20px;"}
+[← Previous](#start){style="padding: 8px 15px; border: 1px solid #ccc; border-radius: 5px; text-decoration: none;"}   [Next →](#Domain2){style="padding: 8px 15px; border: 1px solid #ccc; border-radius: 5px; text-decoration: none;"}
+:::
+
+# 2. Specialist Pathway Key Indicators {#Domain2}
+
+The Specialist Pathway Key Indicators evaluate the effectiveness of stroke care by measuring the proportion of patients directly admitted to a stroke unit within four hours of clock start, the median time taken to reach the stroke unit, the percentage of patients who spent at least 90% of their hospital stay on the stroke unit, and the proportion of patients who received treatment from a specialist community rehabilitation team such as Early Supported Discharge (ESD), Community Rehabilitation Team (CRT), or a combined service.
+
+```{r}
+#| label: Domain 2 average score
+#| fig-align: center
+#| out-width: 100%
+
+if (file.exists("out/plots/domain_scores/Domain_Two.svg")) {
+  knitr::include_graphics("out/plots/domain_scores/Domain_Two.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+
+```
+
+### Individual indicators for domain two
+
+::: panel-tabset
+# 2.1
+
+```{r}
+#| label: "2.1"
+#| lightbox:
+#|   group: Domain 2
+
+if (file.exists("out/plots/key_indicators/KI_2_1.svg")) {
+  knitr::include_graphics("out/plots/key_indicators/KI_2_1.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+```
+
+# 2.1
+
+```{r}
+#| label: "2.2"
+#| lightbox:
+#|   group: Domain 2
+
+if (file.exists("out/plots/key_indicators/KI_2_2.svg")) {
+  knitr::include_graphics("out/plots/key_indicators/KI_2_2.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+```
+
+# 2.3
+
+```{r}
+#| label: "2.3"
+#| lightbox:
+#|   group: Domain 2
+
+if (file.exists("out/plots/key_indicators/KI_2_3.svg")) {
+  knitr::include_graphics("out/plots/key_indicators/KI_2_3.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+```
+
+# 2.4
+
+```{r}
+#| label: "2.4"
+#| lightbox:
+#|   group: Domain 2
+
+if (file.exists("out/plots/key_indicators/KI_2_4.svg")) {
+  knitr::include_graphics("out/plots/key_indicators/KI_2_4.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+```
+:::
+
+::: {.callout-note collapse="true"}
+## Indicator code descriptions
+
+**KI.2.1** = Percentage of patients directly admitted to a stroke unit within 4 hours of clock start\
+**KI.2.2** = Median time between clock start and arrival on stroke unit (hours:mins) [**matrix**.]{style="font-size: 12px; color: #B30300"}\
+**KI.2.3** = Percentage of patients who spent at least 90% of their stay on stroke unit\
+**KI.2.4** = Percentage of patients treated by a stroke specialist community rehabilitation team (ESD, CRT or combined) [**multiplier**.]{style="font-size: 12px; color: #B30300"}\
+:::
+
+### 2. Data tables
+
+```{r}
+#| label: "domain_two: data table"
+#| fig-align: center
+#| out-width: 100%
+
+domain_two<-
+agg_data|>
+  dplyr::reframe(date
+          ,KI_2_1 = as.numeric(KI_2_1)
+          ,KI_2_2 = chron::times(pmin(KI_2_2,86399)/86400)
+          ,KI_2_3 = as.numeric(KI_2_3)
+          ,KI_2_4 = as.numeric(KI_2_4)
+          ,Domain_Two
+  )|>
+  dplyr::arrange(desc(date))|>
+  head(12)|>
+  as.data.frame()
+
+domain_two|>
+  gt::gt()|>
+    gt::fmt_percent(
+      columns = dplyr::all_of(
+        c("KI_2_1","KI_2_3","KI_2_4","Domain_Two"))
+      )|>
+    gt::grand_summary_rows(
+      columns = dplyr::all_of(
+        c("KI_2_1","KI_2_2","KI_2_3","KI_2_4","Domain_Two")),
+      fns = list(
+        min~min(., na.rm = TRUE)
+        ,median~median(.,na.rm = TRUE)
+        ,max~max(., na.rm = TRUE)
+      )
+      , fmt = ~fmt_percent(.,dplyr::all_of(c("KI_2_1","KI_2_3","KI_2_4","Domain_Two")),use_seps = FALSE)
+    )|>
+    gt::cols_label(KI_2_1="K.I 2.1"
+                   ,KI_2_2="K.I 2.2"
+                   ,KI_2_3="K.I 2.3"
+                   ,KI_2_4="K.I 2.4"
+                   ,Domain_Two = gt::md("Domain<br>Avg Score"))|>
+    gt::cols_align(align = "center"
+             ,columns = everything())|>
+    gt::tab_header(
+    title = gt::md("**2. Specialist Pathway Key Indicators**")
+    #,subtitle = md(paste0(DataTableFrom," & ",DataTableTo))
+  )|>
+    gt::tab_footnote(
+    footnote = "Data produced from the beta version of the NHSssnapR package"
+  )|>
+    gt::tab_source_note(
+    source_note = "Sourced from SSNAP Team data export"
+  )|>
+    gt::opt_align_table_header(align = "left")|>
+    gt::opt_stylize(color = "gray", add_row_striping = TRUE )|>
+    gt::tab_options(table.font.size = 13) # 12 is slightly too small/14 default
+```
+
+::: {style="text-align: center; margin-top: 20px;"}
+[← Previous](#Domain1){style="padding: 8px 15px; border: 1px solid #ccc; border-radius: 5px; text-decoration: none;"}   [Next →](#Domain3){style="padding: 8px 15px; border: 1px solid #ccc; border-radius: 5px; text-decoration: none;"}
+:::
+
+# 3. Reperfusion Key Indicators {#Domain3}
+
+The Reperfusion Key Indicators evaluate the effectiveness and timeliness of acute stroke interventions, focusing on the administration of thrombolysis and thrombectomy. These indicators include the proportion of stroke patients who receive thrombolysis, those with extended indications treated with thrombolysis, and the percentage treated within four hours compared to site-specific targets. Additionally, they measure the median time from clock start to thrombolysis administration, the proportion of patients undergoing thrombectomy, the median duration from arrival to discharge for patients receiving thrombectomy (door-in-door-out), and the time taken from arrival at the thrombectomy centre to arterial puncture (door to puncture).
+
+```{r}
+#| label: Domain 3 average score
+#| fig-align: center
+#| out-width: 100%
+
+if (file.exists("out/plots/domain_scores/Domain_Three.svg")) {
+  knitr::include_graphics("out/plots/domain_scores/Domain_Three.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+
+```
+
+::: panel-tabset
+# 3.1
+
+```{r}
+#| label: "3.1"
+#| lightbox:
+#|   group: Domain 3
+
+if (file.exists("out/plots/key_indicators/KI_3_1.svg")) {
+  knitr::include_graphics("out/plots/key_indicators/KI_3_1.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+```
+
+# 3.2
+
+```{r}
+#| label: "3.2"
+#| lightbox:
+#|   group: Domain 3
+
+if (file.exists("out/plots/key_indicators/KI_3_2.svg")) {
+  knitr::include_graphics("out/plots/key_indicators/KI_3_2.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+```
+
+# 3.3
+
+```{r}
+#| label: "3.3"
+#| lightbox:
+#|   group: Domain 3
+
+if (file.exists("out/plots/key_indicators/KI_3_3.svg")) {
+  knitr::include_graphics("out/plots/key_indicators/KI_3_3.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+```
+
+# 3.4
+
+```{r}
+#| label: "3.4"
+#| lightbox:
+#|   group: Domain 3
+
+if (file.exists("out/plots/key_indicators/KI_3_4.svg")) {
+  knitr::include_graphics("out/plots/key_indicators/KI_3_4.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+```
+
+# 3.5
+
+```{r}
+#| label: "3.5"
+#| lightbox:
+#|   group: Domain 3
+
+if (file.exists("out/plots/key_indicators/KI_3_5.svg")) {
+  knitr::include_graphics("out/plots/key_indicators/KI_3_5.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+```
+
+# 3.6
+
+```{r}
+#| label: "3.6"
+#| lightbox:
+#|   group: Domain 3
+
+if (file.exists("out/plots/key_indicators/KI_3_6.svg")) {
+  knitr::include_graphics("out/plots/key_indicators/KI_3_6.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+```
+
+# 3.7
+
+```{r}
+#| label: "3.7"
+#| lightbox:
+#|   group: Domain 3
+
+if (file.exists("out/plots/key_indicators/KI_3_7.svg")) {
+  knitr::include_graphics("out/plots/key_indicators/KI_3_7.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+```
+:::
+
+::: {.callout-note collapse="true"}
+## Indicator code descriptions
+
+**KI.3.1** = Percentage of all stroke patients given thrombolysis [**multiplier**.]{style="font-size: 12px; color: #B30300"}\
+**KI.3.2** = Percentage of stroke patients with extended indications for thrombolysis given thrombolysis [**multiplier**.]{style="font-size: 12px; color: #B30300"}\
+**KI.3.3** = Percentage of stroke patients given thrombolysis (within 4h) compared with bespoke site-specific target\
+**KI.3.4** = Median time between clock start and thrombolysis (hours:mins) [**matrix**.]{style="font-size: 12px; color: #B30300"}\
+**KI.3.5** = Percentage of all patients given thrombectomy [**multiplier**.]{style="font-size: 12px; color: #B30300"}\
+**KI.3.6** = n/a NUH Median time between arrival and discharge at first admitting team (door-in door-out) for patients receiving thrombectomy [**matrix**.]{style="font-size: 12px; color: #B30300"}\
+**KI.3.7** = Median time between arrival at thrombectomy centre and arterial puncture (door to puncture) [**matrix**.]{style="font-size: 12px; color: #B30300"}\
+:::
+
+### 3. Data tables
+
+```{r}
+#| label: "domain_three: data table"
+#| fig-align: center
+#| out-width: 100%
+
+domain_three<-
+agg_data|>
+  dplyr::reframe(date
+          ,KI_3_1 = as.numeric(KI_3_1)
+          ,KI_3_2 = as.numeric(KI_3_2)
+          ,KI_3_3 = as.numeric(KI_3_3)
+          ,KI_3_4 = chron::times(KI_3_4/86400)
+          ,KI_3_5 = as.numeric(KI_3_5)
+          ,KI_3_6 = chron::times(KI_3_6/86400)
+          ,KI_3_7 = chron::times(KI_3_7/86400)
+          ,Domain_Three
+  )|>
+  dplyr::arrange(desc(date))|>
+  head(12)|>
+  as.data.frame()
+
+domain_three|>
+  gt::gt()|>
+    gt::fmt_percent(
+      columns = dplyr::all_of(
+        c("KI_3_1","KI_3_2","KI_3_3","KI_3_5","Domain_Three"))
+      )|>
+    gt::grand_summary_rows(
+      columns = dplyr::all_of(
+        c("KI_3_1","KI_3_2","KI_3_3","KI_3_4","KI_3_5","KI_3_6","KI_3_7","Domain_Three")),
+      fns = list(
+        min~min(., na.rm = TRUE)
+        ,median~median(.,na.rm = TRUE)
+        ,max~max(., na.rm = TRUE)
+      )
+      , fmt = ~fmt_percent(.,dplyr::all_of(c("KI_3_1","KI_3_2","KI_3_3","KI_3_5","Domain_Three")),use_seps = FALSE)
+    )|>
+    gt::cols_label(KI_3_1="K.I 3.1"
+                   ,KI_3_2="K.I 3.2"
+                   ,KI_3_3="K.I 3.3"
+                   ,KI_3_4="K.I 3.4"
+                   ,KI_3_5="K.I 3.5"
+                   ,KI_3_6="K.I 3.6"
+                   ,KI_3_7="K.I 3.7"
+                   ,Domain_Three = gt::md("Domain<br>Avg Score"))|>
+    gt::cols_align(align = "center"
+             ,columns = everything())|>
+    gt::tab_header(
+    title = gt::md("**3. Reperfusion Key Indicators**")
+    #,subtitle = md(paste0(DataTableFrom," & ",DataTableTo))
+  )|>
+    gt::tab_footnote(
+    footnote = "Data produced from the beta version of the NHSssnapR package"
+  )|>
+    gt::tab_source_note(
+    source_note = "Sourced from SSNAP Team data export"
+  )|>
+    gt::opt_align_table_header(align = "left")|>
+    gt::opt_stylize(color = "gray", add_row_striping = TRUE )|>
+    gt::tab_options(table.font.size = 13) # 12 is slightly too small/14 default
+```
+
+::: {style="text-align: center; margin-top: 20px;"}
+[← Previous](#Domain2){style="padding: 8px 15px; border: 1px solid #ccc; border-radius: 5px; text-decoration: none;"}   [Next →](#Domain4){style="padding: 8px 15px; border: 1px solid #ccc; border-radius: 5px; text-decoration: none;"}
+:::
+
+# 4. Specialist assessment Key Indicators {#Domain4}
+
+The specialist assessment key indicators focus on ensuring timely and comprehensive evaluations for stroke patients. They measure the percentage of patients assessed by a stroke specialist consultant within 14 hours of clock start, those receiving a formal swallow assessment within 24 hours, and the proportion of patients assessed by an occupational therapist and a physiotherapist within the same 24-hour window. Additionally, they track the percentage of applicable patients who are assessed by a speech and language therapist within 72 hours of clock start.
+
+```{r}
+#| label: Domain 4 average score
+#| fig-align: center
+#| out-width: 100%
+
+if (file.exists("out/plots/domain_scores/Domain_Four.svg")) {
+  knitr::include_graphics("out/plots/domain_scores/Domain_Four.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+
+```
+
+::: panel-tabset
+# 4.1
+
+```{r}
+#| label: "4.1"
+#| lightbox:
+#|   group: Domain 4
+
+if (file.exists("out/plots/key_indicators/KI_4_1.svg")) {
+  knitr::include_graphics("out/plots/key_indicators/KI_4_1.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+```
+
+# 4.2
+
+```{r}
+#| label: "4.2"
+#| lightbox:
+#|   group: Domain 4
+
+if (file.exists("out/plots/key_indicators/KI_4_2.svg")) {
+  knitr::include_graphics("out/plots/key_indicators/KI_4_2.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+```
+
+# 4.3
+
+```{r}
+#| label: "4.3"
+#| lightbox:
+#|   group: Domain 4
+
+if (file.exists("out/plots/key_indicators/KI_4_3.svg")) {
+  knitr::include_graphics("out/plots/key_indicators/KI_4_3.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+```
+
+# 4.4
+
+```{r}
+#| label: "4.4"
+#| lightbox:
+#|   group: Domain 4
+
+if (file.exists("out/plots/key_indicators/KI_4_4.svg")) {
+  knitr::include_graphics("out/plots/key_indicators/KI_4_4.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+```
+
+# 4.5
+
+```{r}
+#| label: "4.5"
+#| lightbox:
+#|   group: Domain 4
+
+if (file.exists("out/plots/key_indicators/KI_4_5.svg")) {
+  knitr::include_graphics("out/plots/key_indicators/KI_4_5.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+```
+:::
+
+::: {.callout-note collapse="true"}
+## Indicator code descriptions
+
+**KI.4.1** Percentage of patients assessed by a stroke specialist consultant within 14 hours of clock start\
+**KI.4.2** Percentage of applicable patients who were given a formal swallow assessment within 24 hours of clock start\
+**KI.4.3** Percentage of applicable patients who were assessed by an occupational therapist within 24 hours of clock start\
+**KI.4.4** Percentage of applicable patients who were assessed by a physiotherapist within 24 hours of clock start\
+**KI.4.5** Percentage of applicable patients who were assessed by a speech and language therapist within 72 hours of clock start\
+:::
+
+### 4. Data tables
+
+```{r}
+#| label: "domain_four: data table"
+#| fig-align: center
+#| out-width: 100%
+
+domain_four<-
+agg_data|>
+  dplyr::reframe(date
+          ,KI_4_1 = as.numeric(KI_4_1)
+          ,KI_4_2 = as.numeric(KI_4_2)
+          ,KI_4_3 = as.numeric(KI_4_3)
+          ,KI_4_4 = as.numeric(KI_4_4)
+          ,KI_4_5 = as.numeric(KI_4_5)
+          ,Domain_Four
+  )|>
+  dplyr::arrange(desc(date))|>
+  head(12)|>
+  as.data.frame()
+
+domain_four|>
+  gt::gt()|>
+    gt::fmt_percent(
+      columns = dplyr::all_of(
+        c("KI_4_1","KI_4_2","KI_4_3","KI_4_4","KI_4_5","Domain_Four"))
+      )|>
+    gt::grand_summary_rows(
+      columns = dplyr::all_of(
+        c("KI_4_1","KI_4_2","KI_4_3","KI_4_4","KI_4_5","Domain_Four")),
+      fns = list(
+        min~min(., na.rm = TRUE)
+        ,median~median(.,na.rm = TRUE)
+        ,max~max(., na.rm = TRUE)
+      )
+      , fmt = ~fmt_percent(.,dplyr::all_of(c("KI_4_1","KI_4_2","KI_4_3","KI_4_4","KI_4_5","Domain_Four")),use_seps = FALSE)
+    )|>
+    gt::cols_label(KI_4_1="K.I 4.1"
+                   ,KI_4_2="K.I 4.2"
+                   ,KI_4_3="K.I 4.3"
+                   ,KI_4_4="K.I 4.4"
+                   ,KI_4_5="K.I 4.5"
+                   ,Domain_Four = gt::md("Domain<br>Avg Score"))|>
+    gt::cols_align(align = "center"
+             ,columns = everything())|>
+    gt::tab_header(
+    title = gt::md("**4. Specialist assessment Key Indicators**")
+    #,subtitle = md(paste0(DataTableFrom," & ",DataTableTo))
+  )|>
+    gt::tab_footnote(
+    footnote = "Data produced from the beta version of the NHSssnapR package"
+  )|>
+    gt::tab_source_note(
+    source_note = "Sourced from SSNAP Team data export"
+  )|>
+    gt::opt_align_table_header(align = "left")|>
+    gt::opt_stylize(color = "gray", add_row_striping = TRUE )|>
+    gt::tab_options(table.font.size = 13) # 12 is slightly too small/14 default
+```
+
+::: {style="text-align: center; margin-top: 20px;"}
+[← Previous](#Domain3){style="padding: 8px 15px; border: 1px solid #ccc; border-radius: 5px; text-decoration: none;"}   [Next →](#Domain5){style="padding: 8px 15px; border: 1px solid #ccc; border-radius: 5px; text-decoration: none;"}
+:::
+
+# 5. Therapy intensity Key Indicators {#Domain5}
+
+The Therapy Intensity Key Indicators assess the quality and quantity of rehabilitation delivered to stroke patients. They measure the proportion of patients who are promptly assessed by a nurse, occupational therapist, physiotherapist, and speech and language therapist within specified timeframes, alongside having rehabilitation goals agreed within five days. Additionally, they track the percentage of patients meeting the NICE target for total therapy dose, as well as the median daily minutes of therapy received during their inpatient stay.
+
+```{r}
+#| label: Domain 5 average score
+#| fig-align: center
+#| out-width: 100%
+
+if (file.exists("out/plots/domain_scores/Domain_Five.svg")) {
+  knitr::include_graphics("out/plots/domain_scores/Domain_Five.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+
+```
+
+::: panel-tabset
+# 5.1
+
+```{r}
+#| label: "5.1"
+#| lightbox:
+#|   group: Domain 5
+
+if (file.exists("out/plots/key_indicators/KI_5_1.svg")) {
+  knitr::include_graphics("out/plots/key_indicators/KI_5_1.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+```
+
+# 5.2
+
+```{r}
+#| label: "5.2"
+#| lightbox:
+#|   group: Domain 5
+
+if (file.exists("out/plots/key_indicators/KI_5_2.svg")) {
+  knitr::include_graphics("out/plots/key_indicators/KI_5_2.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+```
+
+# 5.3
+
+```{r}
+#| label: "5.3"
+#| lightbox:
+#|   group: Domain 5
+
+if (file.exists("out/plots/key_indicators/KI_5_3.svg")) {
+  knitr::include_graphics("out/plots/key_indicators/KI_5_3.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+```
+:::
+
+::: {.callout-note collapse="true"}
+## Indicator code descriptions
+
+**5.1** Percentage of applicable patients who are assessed by a nurse within 4 hours AND occupational therapist and physiotherapist within 24 hours AND speech and language therapist within 72 hours AND have rehab goals agreed within 5 days\
+**5.2** Percentage of patients achieving the NICE target for total therapy dose received [**multiplier**.]{style="font-size: 12px; color: #B30300"}\
+**5.3** Median number of minutes of total therapy received per day the patient is an inpatient\
+:::
+
+### 5. Data tables
+
+```{r}
+#| label: "domain_five: data table"
+#| fig-align: center
+#| out-width: 100%
+
+domain_five<-
+agg_data|>
+  dplyr::reframe(date
+          ,KI_5_1 = as.numeric(KI_5_1)
+          ,KI_5_2 = as.numeric(KI_5_2)
+          ,KI_5_3 = chron::times(KI_5_3/86400)
+          ,Domain_Five
+  )|>
+  dplyr::arrange(desc(date))|>
+  head(12)|>
+  as.data.frame()
+
+domain_five|>
+  gt::gt()|>
+    gt::fmt_percent(
+      columns = dplyr::all_of(
+        c("KI_5_1","KI_5_2","Domain_Five"))
+      )|>
+    gt::grand_summary_rows(
+      columns = dplyr::all_of(
+        c("KI_5_1","KI_5_2","KI_5_3","Domain_Five")),
+      fns = list(
+        min~min(., na.rm = TRUE)
+        ,median~median(.,na.rm = TRUE)
+        ,max~max(., na.rm = TRUE)
+      )
+      , fmt = ~fmt_percent(.,dplyr::all_of(c("KI_5_1","KI_5_2","Domain_Five")),use_seps = FALSE)
+    )|>
+    gt::cols_label(KI_5_1="K.I 5.1"
+                   ,KI_5_2="K.I 5.2"
+                   ,KI_5_3="K.I 5.3"
+                   ,Domain_Five = gt::md("Domain<br>Avg Score"))|>
+    gt::cols_align(align = "center"
+             ,columns = everything())|>
+    gt::tab_header(
+    title = gt::md("**5. Therapy intensity Key Indicators**")
+    #,subtitle = md(paste0(DataTableFrom," & ",DataTableTo))
+  )|>
+    gt::tab_footnote(
+    footnote = "Data produced from the beta version of the NHSssnapR package"
+  )|>
+    gt::tab_source_note(
+    source_note = "Sourced from SSNAP Team data export"
+  )|>
+    gt::opt_align_table_header(align = "left")|>
+    gt::opt_stylize(color = "gray", add_row_striping = TRUE )|>
+    gt::tab_options(table.font.size = 13) # 12 is slightly too small/14 default
+```
+
+::: {style="text-align: center; margin-top: 20px;"}
+[← Previous](#Domain4){style="padding: 8px 15px; border: 1px solid #ccc; border-radius: 5px; text-decoration: none;"}   [Next →](#Domain6){style="padding: 8px 15px; border: 1px solid #ccc; border-radius: 5px; text-decoration: none;"}
+:::
+
+# 6. Therapy frequency Key Indicators {#Domain6}
+
+The Therapy Frequency Key Indicators assess how often stroke patients receive essential therapies during their hospital stay, including measuring the proportion of patients given three hours of motor therapy per day, those receiving at least 45 minutes of psychological or communication/swallowing therapy daily, and the median percentage of inpatient days on which each type of therapy is delivered.
+
+```{r}
+#| label: Domain 6 average score
+#| fig-align: center
+#| out-width: 100%
+
+if (file.exists("out/plots/domain_scores/Domain_Six.svg")) {
+  knitr::include_graphics("out/plots/domain_scores/Domain_Six.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+
+```
+
+::: panel-tabset
+# 6.1
+
+```{r}
+#| label: "6.1"
+#| lightbox:
+#|   group: Domain 6
+
+if (file.exists("out/plots/key_indicators/KI_6_1.svg")) {
+  knitr::include_graphics("out/plots/key_indicators/KI_6_1.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+```
+
+# 6.2
+
+```{r}
+#| label: "6.2"
+#| lightbox:
+#|   group: Domain 6
+
+if (file.exists("out/plots/key_indicators/KI_6_2.svg")) {
+  knitr::include_graphics("out/plots/key_indicators/KI_6_2.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+```
+
+# 6.3
+
+```{r}
+#| label: "6.3"
+#| lightbox:
+#|   group: Domain 6
+
+if (file.exists("out/plots/key_indicators/KI_6_3.svg")) {
+  knitr::include_graphics("out/plots/key_indicators/KI_6_3.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+```
+
+# 6.4
+
+```{r}
+#| label: "6.4"
+#| lightbox:
+#|   group: Domain 6
+
+if (file.exists("out/plots/key_indicators/KI_6_4.svg")) {
+  knitr::include_graphics("out/plots/key_indicators/KI_6_4.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+```
+
+# 6.5
+
+```{r}
+#| label: "6.5"
+#| lightbox:
+#|   group: Domain 6
+
+if (file.exists("out/plots/key_indicators/KI_6_5.svg")) {
+  knitr::include_graphics("out/plots/key_indicators/KI_6_5.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+```
+
+# 6.6
+
+```{r}
+#| label: "6.6"
+#| lightbox:
+#|   group: Domain 6
+
+if (file.exists("out/plots/key_indicators/KI_6_6.svg")) {
+  knitr::include_graphics("out/plots/key_indicators/KI_6_6.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+```
+:::
+
+::: {.callout-note collapse="true"}
+## Indicator code descriptions
+
+**6.1** Percentage of patients receiving 3 hours of motor therapy per day motor therapy received [**multiplier**.]{style="font-size: 12px; color: #B30300"}\
+**6.2** Median percentage of days as an inpatient on which motor function therapy is received\
+**6.3** Percentage of patients receiving 45 minutes of psychological therapy per day psychological therapy received\
+**6.4** Median percentage of days as an inpatient on which psychological therapy is received\
+**6.5** Percentage of patients receiving 45 minutes of communication/swallowing therapy per day communication/swallowing therapy received\
+**6.6** Median percentage of days as an inpatient on which communication/swallowing is received\
+:::
+
+### 6. Data tables
+
+```{r}
+#| label: "domain_six: data table"
+#| fig-align: center
+#| out-width: 100%
+
+domain_six<-
+agg_data|>
+  dplyr::reframe(date
+          ,KI_6_1 = as.numeric(KI_6_1)
+          ,KI_6_2 = as.numeric(KI_6_2)
+          ,KI_6_3 = as.numeric(KI_6_3)
+          ,KI_6_4 = as.numeric(KI_6_4)
+          ,KI_6_5 = as.numeric(KI_6_5)
+          ,KI_6_6 = as.numeric(KI_6_6)
+          ,Domain_Six
+  )|>
+  dplyr::arrange(desc(date))|>
+  head(12)|>
+  as.data.frame()
+
+domain_six|>
+  gt::gt()|>
+    gt::fmt_percent(
+      columns = dplyr::all_of(
+        c("KI_6_1","KI_6_2","KI_6_3","KI_6_4","KI_6_5","KI_6_6","Domain_Six"))
+      )|>
+    gt::grand_summary_rows(
+      columns = dplyr::all_of(
+        c("KI_6_1","KI_6_2","KI_6_3","KI_6_4","KI_6_5","KI_6_6","Domain_Six")),
+      fns = list(
+        min~min(., na.rm = TRUE)
+        ,median~median(.,na.rm = TRUE)
+        ,max~max(., na.rm = TRUE)
+      )
+      , fmt = ~fmt_percent(.,dplyr::all_of(c("KI_6_1","KI_6_2","KI_6_3","KI_6_4","KI_6_5","KI_6_6","Domain_Six")),use_seps = FALSE)
+    )|>
+    gt::cols_label(KI_6_1="K.I 6.1"
+                   ,KI_6_2="K.I 6.2"
+                   ,KI_6_3="K.I 6.3"
+                   ,KI_6_4="K.I 6.4"
+                   ,KI_6_5="K.I 6.5"
+                   ,KI_6_6="K.I 6.6"
+                   ,Domain_Six = gt::md("Domain<br>Avg Score"))|>
+    gt::cols_align(align = "center"
+             ,columns = everything())|>
+    gt::tab_header(
+    title = gt::md("**6. Therapy frequency Key Indicators**")
+    #,subtitle = md(paste0(DataTableFrom," & ",DataTableTo))
+  )|>
+    gt::tab_footnote(
+    footnote = "Data produced from the beta version of the NHSssnapR package"
+  )|>
+    gt::tab_source_note(
+    source_note = "Sourced from SSNAP Team data export"
+  )|>
+    gt::opt_align_table_header(align = "left")|>
+    gt::opt_stylize(color = "gray", add_row_striping = TRUE )|>
+    gt::tab_options(table.font.size = 13) # 12 is slightly too small/14 default
+```
+
+::: {style="text-align: center; margin-top: 20px;"}
+[← Previous](#Domain5){style="padding: 8px 15px; border: 1px solid #ccc; border-radius: 5px; text-decoration: none;"}   [Next →](#Domain7){style="padding: 8px 15px; border: 1px solid #ccc; border-radius: 5px; text-decoration: none;"}
+:::
+
+# 7. Standards by discharge Key Indicators {#Domain7}
+
+The Standards by Discharge Key Indicators evaluate the quality of care provided to stroke patients prior to hospital discharge. These indicators encompass the percentage of patients screened for nutrition and reviewed by a dietitian, infection rates for urinary tract infections and pneumonia treated with antibiotics within the first seven days, and the proportion of patients screened for mood, cognition, and vision. Furthermore, they assess how many patients are evaluated by a psychologist and an orthoptist (or have an orthoptic outpatient appointment scheduled) before discharge, as well as the percentage of those discharged alive who receive a named contact for ongoing information, support, and advice.
+
+```{r}
+#| label: Domain 7 average score
+#| fig-align: center
+#| out-width: 100%
+
+if (file.exists("out/plots/domain_scores/Domain_Seven.svg")) {
+  knitr::include_graphics("out/plots/domain_scores/Domain_Seven.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+
+```
+
+::: panel-tabset
+# 7.1
+
+```{r}
+#| label: "7.1"
+#| lightbox:
+#|   group: Domain 7
+
+if (file.exists("out/plots/key_indicators/KI_7_1.svg")) {
+  knitr::include_graphics("out/plots/key_indicators/KI_7_1.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+```
+
+# 7.2
+
+```{r}
+#| label: "7.2"
+#| lightbox:
+#|   group: Domain 7
+
+if (file.exists("out/plots/key_indicators/KI_7_2.svg")) {
+  knitr::include_graphics("out/plots/key_indicators/KI_7_2.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+```
+
+# 7.3
+
+```{r}
+#| label: "7.3"
+#| lightbox:
+#|   group: Domain 7
+
+if (file.exists("out/plots/key_indicators/KI_7_3.svg")) {
+  knitr::include_graphics("out/plots/key_indicators/KI_7_3.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+```
+
+# 7.4
+
+```{r}
+#| label: "7.4"
+#| lightbox:
+#|   group: Domain 7
+
+if (file.exists("out/plots/key_indicators/KI_7_4.svg")) {
+  knitr::include_graphics("out/plots/key_indicators/KI_7_4.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+```
+
+# 7.5
+
+```{r}
+#| label: "7.5"
+#| lightbox:
+#|   group: Domain 7
+
+if (file.exists("out/plots/key_indicators/KI_7_5.svg")) {
+  knitr::include_graphics("out/plots/key_indicators/KI_7_5.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+```
+
+# 7.6
+
+```{r}
+#| label: "7.6"
+#| lightbox:
+#|   group: Domain 7
+
+if (file.exists("out/plots/key_indicators/KI_7_6.svg")) {
+  knitr::include_graphics("out/plots/key_indicators/KI_7_6.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+```
+
+# 7.7
+
+```{r}
+#| label: "7.7"
+#| lightbox:
+#|   group: Domain 7
+
+if (file.exists("out/plots/key_indicators/KI_7_7.svg")) {
+  knitr::include_graphics("out/plots/key_indicators/KI_7_7.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+```
+
+# 7.8
+
+```{r}
+#| label: "7.8"
+#| lightbox:
+#|   group: Domain 7
+
+if (file.exists("out/plots/key_indicators/KI_7_8.svg")) {
+  knitr::include_graphics("out/plots/key_indicators/KI_7_8.svg")
+} else {
+  plot(1, type = "n", axes = FALSE, xlab = "", ylab = "")+
+    text(1, 1, "¯\\_(ツ)_/¯", cex = 3)+
+    text(1, 1.2, "This should only occur if KI is n/a for your team", cex = 1)
+}
+```
+:::
+
+::: {.callout-note collapse="true"}
+## Indicator code descriptions
+
+**7.1** Percentage of applicable patients screened for nutrition and seen by a dietitian by discharge (or seen by a dietitian before screening)\
+**7.2** Infection rate: percentage of patients with a urinary tract infection in the first 7 days and percentage of patients given antibiotics for newly acquired pneumonia in the first 7 days [**matrix**.]{style="font-size: 12px; color: #B30300"}\
+**7.3** Percentage of applicable patients who have mood screening by discharge\
+**7.4** Percentage of applicable patients who have cognition screening by discharge\
+**7.5** Percentage of applicable patients assessed by a psychologist by discharge\
+**7.6** Percentage of applicable patients who have vision screening by discharge\
+**7.7** Percentage of applicable patients assessed by an orthoptist by discharge (or have an orthoptic outpatient appointment scheduled by discharge)\
+**7.8** Percentage of those patients discharged alive who are given a named contact for information, support and advice\
+:::
+
+### 7. Data tables
+
+```{r}
+#| label: "domain_seven: data table"
+#| fig-align: center
+#| out-width: 100%
+
+domain_seven<-
+agg_data|>
+  dplyr::reframe(date
+          ,KI_7_1 = as.numeric(KI_7_1)
+          ,KI_7_2 = as.numeric(KI_7_2)
+          ,KI_7_3 = as.numeric(KI_7_3)
+          ,KI_7_4 = as.numeric(KI_7_4)
+          ,KI_7_5 = as.numeric(KI_7_5)
+          ,KI_7_6 = as.numeric(KI_7_6)
+          ,KI_7_7 = as.numeric(KI_7_7)
+          ,KI_7_8 = as.numeric(KI_7_8)
+          ,Domain_Seven
+  )|>
+  dplyr::arrange(desc(date))|>
+  head(12)|>
+  as.data.frame()
+
+domain_seven|>
+  gt::gt()|>
+    gt::fmt_percent(
+      columns = dplyr::all_of(
+        c("KI_7_1","KI_7_2","KI_7_3","KI_7_4","KI_7_5","KI_7_6","KI_7_7","KI_7_8","Domain_Seven"))
+      )|>
+    gt::grand_summary_rows(
+      columns = dplyr::all_of(
+        c("KI_7_1","KI_7_2","KI_7_3","KI_7_4","KI_7_5","KI_7_6","KI_7_7","KI_7_8","Domain_Seven")),
+      fns = list(
+        min~min(., na.rm = TRUE)
+        ,median~median(.,na.rm = TRUE)
+        ,max~max(., na.rm = TRUE)
+      )
+      , fmt = ~fmt_percent(.,dplyr::all_of(c("KI_7_1","KI_7_2","KI_7_3","KI_7_4","KI_7_5","KI_7_6","KI_7_7","KI_7_8","Domain_Seven")),use_seps = FALSE)
+    )|>
+    gt::cols_label(KI_7_1="K.I 7.1"
+                   ,KI_7_2="K.I 7.2"
+                   ,KI_7_3="K.I 7.3"
+                   ,KI_7_4="K.I 7.4"
+                   ,KI_7_5="K.I 7.5"
+                   ,KI_7_6="K.I 7.6"
+                   ,KI_7_7="K.I 7.7"
+                   ,KI_7_8="K.I 7.8"
+                   ,Domain_Seven = gt::md("Domain<br>Avg Score"))|>
+    gt::cols_align(align = "center"
+             ,columns = everything())|>
+    gt::tab_header(
+    title = gt::md("**7. Standards by discharge Key Indicators**")
+    #,subtitle = md(paste0(DataTableFrom," & ",DataTableTo))
+  )|>
+    gt::tab_footnote(
+    footnote = "Data produced from the beta version of the NHSssnapR package"
+  )|>
+    gt::tab_source_note(
+    source_note = "Sourced from SSNAP Team data export"
+  )|>
+    gt::opt_align_table_header(align = "left")|>
+    gt::opt_stylize(color = "gray", add_row_striping = TRUE )|>
+    gt::tab_options(table.font.size = 13) # 12 is slightly too small/14 default
+```
+
+# end

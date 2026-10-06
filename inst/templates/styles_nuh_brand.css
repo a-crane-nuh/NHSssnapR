@@ -1,0 +1,230 @@
+/* ============================================================
+   NUH / NHS BRAND‑ALIGNED CSS FOR QUARTO HTML DOCUMENTS
+   Based on NUH Identity Guidelines 2025
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   1. CORE BRAND COLOURS
+   ------------------------------------------------------------ */
+
+/* NHS Blue — primary brand colour */
+/* “Research shows that patients and the public strongly associate the NHS with the colours blue and white.” */
+:root {
+  --nuh-nhs-blue: #005EB8;
+  --nuh-nhs-dark-blue: #003087;
+  --nuh-nhs-bright-blue: #0072CE;
+  --nuh-nhs-light-blue: #41B6E6;
+  --nuh-nhs-aqua-blue: #00A9CE;
+
+  /* Supporting colours */
+  --nuh-nhs-dark-green: #006747;
+  --nuh-nhs-green: #009639;
+  --nuh-nhs-light-green: #78BE20;
+  --nuh-nhs-aqua-green: #00A499;
+
+  /* Highlight colours (minimal use) */
+  --nuh-nhs-purple: #330072;
+  --nuh-nhs-dark-pink: #7C2855;
+  --nuh-nhs-pink: #AE2573;
+  --nuh-nhs-dark-red: #8A1538;
+  --nuh-nhs-orange: #ED8B00;
+  --nuh-nhs-warm-yellow: #FFB81C;
+  --nuh-nhs-yellow: #FAE100;
+
+  --nuh-white: #FFFFFF;
+  --nuh-black: #000000;
+}
+
+/* ------------------------------------------------------------
+   2. TYPOGRAPHY
+   ------------------------------------------------------------ */
+
+/* “For the corporate templates used by NUH staff, only Arial or Frutiger (if available) should be used.” 
+Frutiger has been commented out */
+body {
+  font-family: /*"Frutiger",*/ "Arial", sans-serif;
+  font-size: 12pt; /* “The standard point size for document body copy is 12 point.” */
+  color: var(--nuh-black);
+  background-color: var(--nuh-white);
+  line-height: 1.5;
+}
+
+/* Larger text for accessibility if user overrides */
+.large-text {
+  font-size: 14pt;
+}
+
+/* Headings styled with NHS Blue */
+h1, h2, h3, h4, h5, h6 {
+  font-family: /*"Frutiger",*/ "Arial", sans-serif;
+  color: var(--nuh-nhs-blue);
+  font-weight: 700;
+  margin-top: 1.2em;
+}
+
+/* ------------------------------------------------------------
+   3. PAGE LAYOUT
+   ------------------------------------------------------------ */
+
+main.content {
+  max-width: 90%; /* changed from 900px*/
+  margin: 0 auto;
+  padding: 40px 20px; /* changed from 2rem*/
+}
+
+/* ------------------------------------------------------------
+   4. LINKS
+   ------------------------------------------------------------ */
+
+a {
+  color: var(--nuh-nhs-blue);
+  text-decoration: underline;
+}
+
+a:hover {
+  color: var(--nuh-nhs-dark-blue);
+}
+
+/* ------------------------------------------------------------
+   5. TABLES
+   ------------------------------------------------------------ */
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.5rem 0;
+  font-size: 11pt;
+}
+
+th {
+  background-color: var(--nuh-nhs-light-blue);
+  color: var(--nuh-black);
+  padding: 8px;
+  border: 1px solid var(--nuh-nhs-blue);
+}
+
+td {
+  padding: 8px;
+  border: 1px solid var(--nuh-nhs-blue);
+}
+
+/* ------------------------------------------------------------
+   6. BLOCKQUOTES
+   ------------------------------------------------------------ */
+
+blockquote {
+  border-left: 4px solid var(--nuh-nhs-blue);
+  padding-left: 1rem;
+  color: var(--nuh-nhs-dark-blue);
+  font-style: italic;
+  background: #f5faff;
+}
+
+/* ------------------------------------------------------------
+   7. CODE BLOCKS
+   ------------------------------------------------------------ */
+
+pre, code {
+  font-family: "Arial Unicode MS", monospace; /* changed from Courier New*/
+  background: #f0f6fa;
+  border: 1px solid var(--nuh-nhs-light-blue);
+  padding: 0.3rem 0.5rem;
+  border-radius: 4px;
+}
+
+/* ------------------------------------------------------------
+   8. FOOTER WITH NUH VALUES
+   ------------------------------------------------------------ */
+
+/* “The NUH Values logo should be used on the bottom left (in the footer) on all internally produced documents.” */
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 3px solid var(--nuh-nhs-blue);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10pt;
+}
+
+/* Placeholder for NUH Values graphic */
+footer .nuh-values {
+  font-weight: bold;
+  color: var(--nuh-nhs-blue);
+}
+
+/* ------------------------------------------------------------
+   9. NHS LOGO POSITIONING
+   ------------------------------------------------------------ */
+
+/* “It should always be used in the top right-hand corner of documents.” */
+header .nhs-logo {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  height: 60px;
+}
+
+/* ------------------------------------------------------------
+   10. CALLOUTS (OPTIONAL NHS‑STYLE)
+   -note
+   -tip
+   -important
+   -caution
+   -warning
+   ------------------------------------------------------------ */
+
+.callout {
+  border-left: 6px solid var(--nuh-nhs-blue);
+  background: #eef7ff;
+  padding: 1rem;
+  margin: 1.5rem 0;
+  border-radius: 4px;
+}
+
+.callout-warning {
+  border-color: var(--nuh-nhs-orange);
+  background: #fff7e6;
+}
+
+.callout-success {
+  border-color: var(--nuh-nhs-green);
+  background: #f2faef;
+}
+
+/* Target the note callout specifically */
+.callout-note.callout {
+  border-left: 3px solid var(--nuh-nhs-blue); /* Thinner, vibrant accent line */
+  background-color: #eef7ff;      /* Very soft blue tint */
+  border-radius: 4px;             /* Slight rounding for a modern feel */
+  
+  /* Tight padding and margins */
+  margin: 1em 0; 
+  padding: 0.6em 0.8em;           
+  
+  border-top: none;
+  border-right: none;
+  border-bottom: none;
+}
+
+/* Tighten the header and remove default bottom margin from the title */
+.callout-note .callout-header {
+  font-size: 0.85rem;             /* Slightly smaller text */
+  text-transform: uppercase;      /* Clean, modern label */
+  letter-spacing: 0.05em;
+  color: var(--nuh-nhs-blue);
+  margin-bottom: 0.2em;           /* Push body text closer to header */
+  font-weight: 700;
+}
+
+/* Ensure the body text is compact */
+.callout-note .callout-body {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: #333;
+}
+
+/* Remove extra spacing from the last paragraph inside the callout */
+.callout-note .callout-body p:last-child {
+  margin-bottom: 0;
+}

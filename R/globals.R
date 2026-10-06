@@ -1,0 +1,24 @@
+#' @noRd
+NULL
+utils::globalVariables(
+  c(
+    "Domain_Onescore"
+    ,"Domain_Twoscore"
+    ,"Domain_Threescore"
+    ,"Domain_Fourscore"
+    ,"Domain_Fivescore"
+    ,"Domain_Sixscore"
+    ,"Domain_Sevenscore"
+    ,"IndicatorColumnId"
+    ,"KeyIndicatorId"
+    ,"x"
+    ,"y"
+    ,"lpl"
+    ,"mean_col"
+    ,"upl"
+    ,"MinScorePercent"
+    ,"MaxScorePercent"
+    ,"DomainCode"
+    ,"TotalKeyIndicatorAvgScore"
+    )
+  )
