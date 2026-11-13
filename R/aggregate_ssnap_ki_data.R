@@ -22,20 +22,29 @@ aggregate_ssnap_ki_data <- function(df, Interval) {
   DomainReference <- load_metadata("SSNAP_Domain_Levels.csv")
 
   all_teams <- merge(load_metadata("Inpatient-Teams-Contact-List-(August-2025-update).csv")
-                     ,load_metadata("Site_specific_Samuel_Target.csv", skip = 1)
+                     ,load_metadata("UPDATED_SAMueL_Targets.csv")
+                     ##,load_metadata("Site_specific_Samuel_Target.csv", skip = 1)
                      ,by.x = "TeamName"
-                     ,by.y = "Site name")|>
+                     ,by.y = "TeamName")|>
     subset(select = c("TeamCode"
                       ,"TeamName"
-                      ,"Bespoke thrombolysis site-specific target for patients arriving within 4 hours of onset (%)"
-                      )
-  )
+                      #,"Bespoke thrombolysis site-specific target for patients arriving within 4 hours of onset (%)"
+                      ,"NEW Targets (2023-26 data)"
+                      ,"OLD Targets (2021-24 data)"
+    )
+    )
 
   names(all_teams)[3]<-"KI.3.3.Site.Target"
 
-  SiteTarget <- all_teams[all_teams$TeamCode == unique(df$SiteCode), ]
+  names(all_teams)[4]<-"KI.3.3.Site.Target.Version.One"
 
-  SiteTarget <- as.numeric(SiteTarget$KI.3.3.Site.Target)/100 # source data conversion
+  SiteTargetSource <- all_teams[all_teams$TeamCode == unique(df$SiteCode), ]
+
+  SiteTarget <- setNames(data.frame(matrix(nrow = 1, ncol = 2)),c("Current","Version.One"))
+
+  SiteTarget$Current <- as.numeric(SiteTargetSource$KI.3.3.Site.Target)/100 # source data conversion
+
+  SiteTarget$Version.One <- as.numeric(SiteTargetSource$KI.3.3.Site.Target.Version.One)/100
 
   aggregation_group = as.Date(cut(df$S01ClockStartTime, breaks = Interval))
 
@@ -84,9 +93,10 @@ aggregate_ssnap_ki_data <- function(df, Interval) {
             ,row.names = NULL
             )
           metric$dn <- tapply(subset(df)[[d]], aggregation_group, sum, na.rm = TRUE)
-          metric$t <- SiteTarget
+          metric$t <- ifelse(metric$date >= as.Date('2026-06-01'),SiteTarget$Current, SiteTarget$Version.One)
+          # metric$t <- SiteTarget   # og
           metric[[paste0(k,"act")]] <- (metric$value/metric$dn)
-          metric[[k]] <- pmin((metric$value/metric$dn)/SiteTarget,1)
+          metric[[k]] <- pmin((metric$value/metric$dn)/metric$t,1)
           metric <- subset(metric, select = c("date","KI_3_3","KI_3_3act")) # this should be the only explicit
           ### append data - SAMueL 2 target ----
           aggregated <- merge(aggregated,metric, by = "date", all = TRUE)

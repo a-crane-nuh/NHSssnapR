@@ -20,5 +20,7 @@ utils::globalVariables(
     ,"MaxScorePercent"
     ,"DomainCode"
     ,"TotalKeyIndicatorAvgScore"
+    ,"setNames"
+    ,"stats"
     )
   )
